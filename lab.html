@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
+        <script>
+            let particles = [];
+            let smoke = new Particle(500, 600);
+            function setup() {
+                createCanvas(window.innerWidth, window.innerHeight);
+                colorMode(HSL);
+            }
+
+            function draw() {
+                background(0, 0, 13);
+            }
+
+            function Particle(x, y) {
+                this.x = x;
+                this.y = x;
+                this.vx = Math.random(-1, 1);
+                this.vy = Math.random(-5, -1);
+                this.hue = Math.random(0, 359);
+                this.lightness = 50;
+                // this.color = color(this.hue, 100, this.lightness);
+                this.speed = 2;
+
+                this.move = function () {
+                    this.y += 1;
+                };
+
+                this.transport = function (mx, my) {
+                    this.x += mx;
+                    this.y += my;
+                };
+
+                this.show = function () {
+                    noStroke();
+                    fill(this.color);
+                    ellipse(this.x, this.y, window.innerHeight / 40);
+                };
+
+                this.updateColor = function () {
+                    if (this.hue >= 360) {
+                        this.hue = 1;
+                    }
+                    this.hue++;
+                    this.lightness -= 0.1;
+                    this.color = color(this.hue, 100, this.lightness);
+                };
+            }
+        </script> -->
+        <script src="js/three.js"></script>
+        <script src="js/three.MeshLine.js"></script>
+        <script>
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            const camera = new THREE.PerspectiveCamera(
+                45,
+                window.innerWidth / window.innerHeight,
+                1,
+                500
+            );
+            camera.position.set(0, 0, 100);
+            camera.lookAt(0, 0, 0);
+            const scene = new THREE.Scene();
+
+            const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+
+            const points = [];
+            points.push(new THREE.Vector3(-10, 0, 0));
+            points.push(new THREE.Vector3(0, 10, 0));
+            points.push(new THREE.Vector3(10, 0, 0));
+            points.push(new THREE.Vector3(20, 0, 0));
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+            const line = new THREE.Line(geometry, material);
+
+            scene.add(line);
+            function animate() {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+                line.rotation.x += 0.01;
+                line.rotation.y += 0.01;
+            }
+            animate();
+        </script>
+    </body>
+</html>
